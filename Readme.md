@@ -6,23 +6,23 @@ Currently only Kameo: Elements of Power is supported, and I use the term "suppor
 Default Movement type is a Walk Around type.
 |Key| Function |
 |--|--|
-|W  |Move Backward |
-|S  |Move Backward |
-|A  |Move Left |
-|D  |Move Right |
-|Z  |Move Down |
-|X  |Move Up |
-|R  |Reset Camera Position |
-|Shift  |Move/Zoom Slower |
-|-(Minus)| Zoom Out|
+|W|Move Backward|
+|S|Move Backward|
+|A|Move Left|
+|D|Move Right|
+|Z|Move Down|
+|X|Move Up|
+|R|Reset Camera Position|
+|Shift|Move/Zoom Slower|
+|-(Minus)|Zoom Out|
 |=(Equals)|Zoom In|
 
 Hold the Ctrl Key to use Axis Aligned Movement:
-|Keys| Axis |
+|Keys|Axis|
 |--|--|
-|W,S  |Z Axis (Toward/Away) |
-|A,D | X Axis (Left/Right) |
-|Z,X  |Y Axis (Up/Down) |
+|W,S|Z Axis (Toward/Away)|
+|A,D|X Axis (Left/Right)|
+|Z,X|Y Axis (Up/Down)|
 
 Right click and Drag in the Viewport to rotate the view. Use the Scrollwheel to Zoom in and Out.
 
@@ -104,6 +104,5 @@ Once you get everything looking pretty, right click on the main file node and se
 Texture De-Tiling and Decoding is pretty much copy-pasta'd from [GTA IV Xbox 360 Texture Editor by "Pimpin Tyler and Anthony"](http://forum.xentax.com/blog/?p=302) ([See Developers notes on Textures](#textures)).
 
 As the source for that program was not released with a license, and I have not yet had a chance to attempt to contact the author(s) of the original software about it, this is currently unlicensed. Any requests by said authors to remove their code from this app will be complied with. I really don't think it'll come to that, but  I really don't want to get sued over a hobby.
-
 
 
