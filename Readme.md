@@ -4,9 +4,10 @@ Currently only Kameo: Elements of Power is supported, and I use the term "suppor
 
 ## Viewport Camera Controls:
 Default Movement type is a Walk Around type.
-|Key| Function |
+
+|Key|Function|
 |--|--|
-|W|Move Backward|
+|W|Move Forward|
 |S|Move Backward|
 |A|Move Left|
 |D|Move Right|
@@ -18,6 +19,7 @@ Default Movement type is a Walk Around type.
 |=(Equals)|Zoom In|
 
 Hold the Ctrl Key to use Axis Aligned Movement:
+
 |Keys|Axis|
 |--|--|
 |W,S|Z Axis (Toward/Away)|
