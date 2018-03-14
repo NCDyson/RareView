@@ -1,0 +1,13 @@
+D:\prj\kameo\KameoView\KameoView\bin\Release\KameoView.exe.config
+D:\prj\kameo\KameoView\KameoView\bin\Release\KameoView.exe
+D:\prj\kameo\KameoView\KameoView\bin\Release\Ionic.Zlib.dll
+D:\prj\kameo\KameoView\KameoView\bin\Release\OpenTK.dll
+D:\prj\kameo\KameoView\KameoView\bin\Release\OpenTK.GLControl.dll
+D:\prj\kameo\KameoView\KameoView\bin\Release\OpenTK.xml
+D:\prj\kameo\KameoView\KameoView\bin\Release\OpenTK.GLControl.xml
+D:\prj\kameo\KameoView\KameoView\obj\Release\KameoView.csprojResolveAssemblyReference.cache
+D:\prj\kameo\KameoView\KameoView\obj\Release\KameoView.MainForm.resources
+D:\prj\kameo\KameoView\KameoView\obj\Release\KameoView.csproj.GenerateResource.Cache
+D:\prj\kameo\KameoView\KameoView\obj\Release\KameoView.exe
+D:\prj\kameo\KameoView\KameoView\bin\Release\data\textures\UV_Grid_Sm.tga
+D:\prj\kameo\KameoView\KameoView\bin\Release\Readme.txt

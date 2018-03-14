@@ -1,0 +1,15 @@
+D:\prj\kameo\RareView\RareView\bin\Debug\data\textures\UV_Grid_Sm.tga
+D:\prj\kameo\RareView\RareView\bin\Debug\Readme.txt
+D:\prj\kameo\RareView\RareView\bin\Debug\RareView.exe.config
+D:\prj\kameo\RareView\RareView\bin\Debug\RareView.exe
+D:\prj\kameo\RareView\RareView\bin\Debug\RareView.pdb
+D:\prj\kameo\RareView\RareView\bin\Debug\Ionic.Zlib.dll
+D:\prj\kameo\RareView\RareView\bin\Debug\OpenTK.dll
+D:\prj\kameo\RareView\RareView\bin\Debug\OpenTK.GLControl.dll
+D:\prj\kameo\RareView\RareView\bin\Debug\OpenTK.xml
+D:\prj\kameo\RareView\RareView\bin\Debug\OpenTK.GLControl.xml
+D:\prj\kameo\RareView\RareView\obj\Debug\RareView.csprojResolveAssemblyReference.cache
+D:\prj\kameo\RareView\RareView\obj\Debug\RareView.MainForm.resources
+D:\prj\kameo\RareView\RareView\obj\Debug\RareView.csproj.GenerateResource.Cache
+D:\prj\kameo\RareView\RareView\obj\Debug\RareView.exe
+D:\prj\kameo\RareView\RareView\obj\Debug\RareView.pdb
