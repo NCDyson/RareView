@@ -88,7 +88,7 @@ namespace RareView
 		void LoadToolStripMenuItemClick(object sender, EventArgs e)
 		{
 			var dlg = new OpenFileDialog();
-			dlg.Filter = "Kameo Caff Files (*.mdl, *.lvl)|*.mdl;*.lvl|All Files (*.*)|*.*";
+			dlg.Filter = "Kameo Caff Files (*.mdl, *.lvl, *.caf)|*.mdl;*.lvl;*.caf|All Files (*.*)|*.*";
 			dlg.Title = "Select files to load...";
 			dlg.Multiselect = true;
 			
@@ -261,6 +261,26 @@ namespace RareView
 		void VertexPointOverlayToolStripMenuItemCheckedChanged(object sender, EventArgs e)
 		{
 			Scene.RenderVertexPointOverlay = vertexPointOverlayToolStripMenuItem.Checked;
+		}
+		void ExitToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			treeView1.SelectedNode = null;
+			
+			foreach(TreeNode selNode in treeView1.Nodes)
+			{
+				treeView1.Nodes.Remove(selNode);
+			
+				var tag = (TreeNodeTag)selNode.Tag;
+				if(tag != null)
+				{
+					if(tag.File != null)
+					{
+						Scene.UnloadCaffFile(tag.File);
+					}
+				}
+			}
+			
+			Application.Exit();
 		}
 
 
