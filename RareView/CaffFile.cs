@@ -81,7 +81,7 @@ namespace RareView
 			
 		}
 		
-		public bool Read(string _fileName)
+		public bool Read(string _fileName, MainForm.UpdateStatusDelegate UpdateDelegate = null)
 		{
 			FileName = _fileName;
 			TreeViewNode = new TreeNode(Path.GetFileName(FileName));
@@ -158,7 +158,7 @@ namespace RareView
 				sectionOffset += tmpSection.CompressedSize;
 			}
 			
-			ReadContents();
+			ReadContents(UpdateDelegate);
 			
 			return true;
 		}
@@ -213,7 +213,7 @@ namespace RareView
 			return null;
 		}
 
-		public virtual void ReadContents()
+		public virtual void ReadContents(MainForm.UpdateStatusDelegate UpdateDelegate = null)
 		{
 		}
 		
@@ -227,21 +227,32 @@ namespace RareView
 			}
 		}
 		
-		public bool Init()
+		public bool Init(MainForm.UpdateStatusDelegate UpdateDelegate = null)
 		{
-			
+			int objID = 0;
 			foreach(var tmpTexture in Textures)
 			{
+				if(UpdateDelegate != null)
+				{
+					float percent = (100.0f / Textures.Count) * objID;
+					UpdateDelegate((int)percent, "Initializing Textures...");
+				}
 				tmpTexture.Init();
+				objID++;
 			}
 
-			
+			objID = 0;
 			foreach(var tmpRenderGraph in RenderGraphs)
 			{
+				if(UpdateDelegate != null)
+				{
+					float percent = (100.0f / RenderGraphs.Count) * objID;
+					UpdateDelegate((int)percent, "Initializing Rendergraphs...");
+				}
 				tmpRenderGraph.Init();
 			}
 			
-			return  true;
+			return true;
 		}
 		
 		public bool DeInit()

@@ -80,7 +80,7 @@ namespace RareView
 		{
 		}
 		
-		public override void ReadContents()
+		public override void ReadContents(MainForm.UpdateStatusDelegate UpdateDelegate = null)
 		{
 			var DataSection = GetSectionData(0);
 			var GPUSection = GetSectionData(1);
@@ -89,6 +89,11 @@ namespace RareView
 			SubObjects = new Caff_SubObject[Header.FileCount];
 			for(int i = 0; i < Header.TocEntryCount; i++)
 			{
+				if(UpdateDelegate != null)
+				{
+					float percent = (100.0f / Header.TocEntryCount) * i;
+					UpdateDelegate((int)percent, "Reading Caf TOC...");
+				}
 				int tmpEntryID = IO.ReadBig32(DataSection) - 1;
 				Caff_SubObject tmpSubObj = SubObjects[tmpEntryID];
 				if(tmpSubObj == null)
@@ -103,6 +108,8 @@ namespace RareView
 				int tmpUnk4 = IO.ReadByte(DataSection);
 				tmpSubObj.SetSection(tmpSectionID - 1, tmpOffset, tmpSize, tmpUnk4);
 			}
+			
+			#if VERBOSE_LOGGING
 			using(var fs = new FileStream(FileName + ".txt", FileMode.OpenOrCreate))
 			{
 				using(var ss = new StreamWriter(fs))
@@ -121,13 +128,20 @@ namespace RareView
 					}
 				}
 			}
+			#endif
 			
 			//var tmpXPR = new XPRFile();
 			string baseDir = System.IO.Path.GetDirectoryName(FileName);
 			string baseFileName = System.IO.Path.GetFileNameWithoutExtension(FileName);
 			
+			int tmpSubObjID = 0;
 			foreach(var tmpSubObj in SubObjects)
 			{
+				if(UpdateDelegate != null)
+				{
+					float percent = (100.0f / SubObjects.Length) * tmpSubObjID;
+					UpdateDelegate((int)percent, "Reading Contents...");
+				}
 				var tmpDataSectionInfo = tmpSubObj.GetSectionInfo(0);
 				var tmpGPUSectionInfo = tmpSubObj.GetSectionInfo(1);
 				if(tmpDataSectionInfo.Offset != -1)
@@ -175,6 +189,7 @@ namespace RareView
 					}
 					
 				}
+				tmpSubObjID++;
 			}
 			
 			//tmpXPR.Write(System.IO.Path.Combine(baseDir, string.Format("{0}.xpr", baseFileName)));

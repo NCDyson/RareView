@@ -42,6 +42,10 @@ namespace RareView
 		private System.Windows.Forms.ToolStripMenuItem logWindowToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem dumpToXprToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem vertexPointOverlayToolStripMenuItem;
+		private System.Windows.Forms.StatusStrip statusStrip1;
+		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+		private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -94,6 +98,10 @@ namespace RareView
 			this.textureContextStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.recropToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.dumpToXprToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+			this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+			this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -111,6 +119,7 @@ namespace RareView
 			this.CaffFileContextMenu.SuspendLayout();
 			this.vertexBatchContextStrip.SuspendLayout();
 			this.textureContextStrip.SuspendLayout();
+			this.statusStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// splitContainer1
@@ -130,7 +139,7 @@ namespace RareView
 			this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ActiveBorder;
 			this.splitContainer1.Panel2.Controls.Add(this.richTextBox1);
 			this.splitContainer1.Panel2Collapsed = true;
-			this.splitContainer1.Size = new System.Drawing.Size(883, 533);
+			this.splitContainer1.Size = new System.Drawing.Size(883, 511);
 			this.splitContainer1.SplitterDistance = 388;
 			this.splitContainer1.TabIndex = 0;
 			// 
@@ -147,7 +156,7 @@ namespace RareView
 			// splitContainer2.Panel2
 			// 
 			this.splitContainer2.Panel2.Controls.Add(this.toolStrip1);
-			this.splitContainer2.Size = new System.Drawing.Size(883, 509);
+			this.splitContainer2.Size = new System.Drawing.Size(883, 487);
 			this.splitContainer2.SplitterDistance = 294;
 			this.splitContainer2.TabIndex = 2;
 			// 
@@ -165,8 +174,8 @@ namespace RareView
 			// splitContainer3.Panel2
 			// 
 			this.splitContainer3.Panel2.Controls.Add(this.propertyGrid1);
-			this.splitContainer3.Size = new System.Drawing.Size(294, 509);
-			this.splitContainer3.SplitterDistance = 245;
+			this.splitContainer3.Size = new System.Drawing.Size(294, 487);
+			this.splitContainer3.SplitterDistance = 223;
 			this.splitContainer3.TabIndex = 0;
 			// 
 			// treeView1
@@ -174,7 +183,7 @@ namespace RareView
 			this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.treeView1.Location = new System.Drawing.Point(0, 0);
 			this.treeView1.Name = "treeView1";
-			this.treeView1.Size = new System.Drawing.Size(294, 245);
+			this.treeView1.Size = new System.Drawing.Size(294, 223);
 			this.treeView1.TabIndex = 0;
 			this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView1AfterSelect);
 			this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeView1NodeMouseClick);
@@ -285,19 +294,19 @@ namespace RareView
 			// loadToolStripMenuItem
 			// 
 			this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-			this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
 			this.loadToolStripMenuItem.Text = "Load";
 			this.loadToolStripMenuItem.Click += new System.EventHandler(this.LoadToolStripMenuItemClick);
 			// 
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(97, 6);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
 			this.exitToolStripMenuItem.Text = "Exit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
 			// 
@@ -384,12 +393,46 @@ namespace RareView
 			this.dumpToXprToolStripMenuItem.Text = "DumpToXpr";
 			this.dumpToXprToolStripMenuItem.Click += new System.EventHandler(this.DumpToXprToolStripMenuItemClick);
 			// 
+			// statusStrip1
+			// 
+			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.toolStripStatusLabel2,
+			this.toolStripStatusLabel1,
+			this.toolStripProgressBar1});
+			this.statusStrip1.Location = new System.Drawing.Point(0, 511);
+			this.statusStrip1.Name = "statusStrip1";
+			this.statusStrip1.Size = new System.Drawing.Size(883, 22);
+			this.statusStrip1.TabIndex = 3;
+			this.statusStrip1.Text = "statusStrip1";
+			// 
+			// toolStripStatusLabel1
+			// 
+			this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+			this.toolStripStatusLabel1.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+			this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
+			this.toolStripStatusLabel1.Visible = false;
+			// 
+			// toolStripProgressBar1
+			// 
+			this.toolStripProgressBar1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+			this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+			this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
+			this.toolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+			this.toolStripProgressBar1.Visible = false;
+			// 
+			// toolStripStatusLabel2
+			// 
+			this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+			this.toolStripStatusLabel2.Size = new System.Drawing.Size(868, 17);
+			this.toolStripStatusLabel2.Spring = true;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(883, 533);
 			this.Controls.Add(this.splitContainer1);
+			this.Controls.Add(this.statusStrip1);
 			this.Name = "MainForm";
 			this.Text = "RareView";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainFormFormClosing);
@@ -414,7 +457,10 @@ namespace RareView
 			this.CaffFileContextMenu.ResumeLayout(false);
 			this.vertexBatchContextStrip.ResumeLayout(false);
 			this.textureContextStrip.ResumeLayout(false);
+			this.statusStrip1.ResumeLayout(false);
+			this.statusStrip1.PerformLayout();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 	}

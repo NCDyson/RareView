@@ -786,14 +786,14 @@ namespace RareView
 			if(!e.Control) ControlModifier = KeyStatus.Up;
 		}
 		
-		public static TreeNode LoadCaffFile(string fileName)
+		public static TreeNode LoadCaffFile(string fileName, MainForm.UpdateStatusDelegate UpdateDelegate = null)
 		{
 			control.MakeCurrent();
 			//var tmpCaff = new CaffFile();
 			var tmpCaff = new KameoCaff();
-			if(tmpCaff.Read(fileName))
+			if(tmpCaff.Read(fileName, UpdateDelegate))
 			{
-				if(tmpCaff.Init()) return tmpCaff.TreeViewNode;
+				if(tmpCaff.Init(UpdateDelegate)) return tmpCaff.TreeViewNode;
 			}
 			
 			return null;

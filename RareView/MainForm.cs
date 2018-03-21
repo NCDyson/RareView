@@ -25,12 +25,16 @@ namespace RareView
 		GLControl glWin = null;
 		public Timer RenderTimer = new Timer();
 		
+		public delegate void UpdateStatusDelegate(int percent, string desc);
+		UpdateStatusDelegate StatusDelegate = null;
+		
 		public MainForm()
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
 			InitializeComponent();
+			StatusDelegate = UpdateStatus;
 			Logger.SetLogControl(richTextBox1);
 			glWin = new GLControl();
 			splitContainer2.Panel2.Controls.Add(glWin);
@@ -53,6 +57,7 @@ namespace RareView
 			RenderTimer.Interval = 15;
 			RenderTimer.Tick += Repaint;
 			RenderTimer.Start();
+			
 		}
 		
 		public void glWin_Paint(object sender, PaintEventArgs e)
@@ -98,17 +103,26 @@ namespace RareView
 		
 		void LoadFiles(string[] fileNames)
 		{
+			loadToolStripMenuItem.Enabled = false;
+			toolStripProgressBar1.Visible = true;
+			toolStripProgressBar1.Value = 0;
+			toolStripStatusLabel1.Visible = true;
+			toolStripStatusLabel1.Text = "";
 			foreach(var tmpFileName in fileNames)
 			{
 				Debug.WriteLine(string.Format("Loading {0}...", tmpFileName));
-				var retNode = Scene.LoadCaffFile(tmpFileName);
+				var retNode = Scene.LoadCaffFile(tmpFileName, StatusDelegate);
 				if(retNode != null)
 				{
 					
 					treeView1.Nodes.Add(retNode);
 				}
 			}
+			toolStripProgressBar1.Visible = false;
+			toolStripStatusLabel1.Visible = false;
+			loadToolStripMenuItem.Enabled = true;
 		}
+		
 		void TreeView1NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
 			if(e.Button == MouseButtons.Right)
@@ -281,6 +295,13 @@ namespace RareView
 			}
 			
 			Application.Exit();
+		}
+		
+		public void UpdateStatus(int percent, string desc)
+		{
+			toolStripStatusLabel1.Text = desc;
+			toolStripProgressBar1.Value = percent;
+			Application.DoEvents();
 		}
 
 

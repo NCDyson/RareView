@@ -29,6 +29,8 @@ namespace RareView
 		public const int TEXTURE_FORMAT_DXT5 = 0x54;
 		public const int TEXTURE_FORMAT_DXN = 0x71;
 		public const int TEXTURE_FORMAT_A8L8 = 0x4a;
+		public const int TEXTURE_FORMAT_X4R4G4B4 = 0x4f;
+		public const int TEXTURE_FORMAT_R5G6B5 = 0x44;
 		
 		
 		public int Offset = 0;
@@ -78,6 +80,16 @@ namespace RareView
 				case TEXTURE_FORMAT_A8R8G8B8:
 				{
 					textureDataSize = (_width * _height) * 4;
+					break;
+				}
+				case TEXTURE_FORMAT_X4R4G4B4:
+				{
+					textureDataSize = (_width * 2) * _height;
+					break;
+				}
+				case TEXTURE_FORMAT_R5G6B5:
+				{
+					textureDataSize = (_width * 2) * _height;
 					break;
 				}
 				default:
@@ -252,6 +264,16 @@ namespace RareView
 					tmpTextureStr = "L8";
 					break;
 				}
+				case TEXTURE_FORMAT_X4R4G4B4:
+				{
+					tmpTextureStr = "X4R4G4B4";
+					break;
+				}
+				case TEXTURE_FORMAT_R5G6B5:
+				{
+					tmpTextureStr = "R5G6B5";
+					break;
+				}
 				default:
 				{
 					tmpTextureStr = string.Format("Unknown({0:X})", TextureFormat);
@@ -306,11 +328,19 @@ namespace RareView
                     texelPitch = 16;
                     break;
                case TEXTURE_FORMAT_A8R8G8B8:
-                blockSize = 1;
-                texelPitch = 4;
+                	blockSize = 1;
+                	texelPitch = 4;
+                    break;
+               case TEXTURE_FORMAT_X4R4G4B4:
+                    blockSize = 1;
+                    texelPitch = 2;
+                    break;
+                   case TEXTURE_FORMAT_R5G6B5:
+                    blockSize = 1;
+                    texelPitch = 2;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException("Bad dxt type!");
+                    throw new ArgumentOutOfRangeException("Bad texture type!");
             }
 
             int blockWidth = _width / blockSize;
@@ -403,12 +433,41 @@ namespace RareView
     			{
     				return DecodeL8(_textureData, _width, _height);
     			}
+        		case TEXTURE_FORMAT_X4R4G4B4:
+    			{
+    				return DecodeX4R4G4B4(_textureData, _width, _height);
+    			}
+        		case TEXTURE_FORMAT_R5G6B5:
+    			{
+    				return DecodeR5G6B5(_textureData, _width, _height);
+    			}
         		default:
     			{
     				return _textureData;
     			}
         	}
         }
+        
+		public static byte[] DecodeX4R4G4B4(byte[] data, int width, int height)
+		{
+			var pixData = new byte[(width * height) * 4];			
+			for(int i = 0; i < (width * height); i++)
+			{
+				int srcOffset = i * 2;
+				int destOffset = i * 4;
+				byte b = (byte)(data[srcOffset] & 0xF);
+				byte x = (byte)((data[srcOffset] >> 4) & 0xf);
+				byte r = (byte)(data[srcOffset + 1] & 0xF);
+				byte g = (byte)((data[srcOffset + 1] >> 4) & 0xf);
+				pixData[destOffset + 0] = (byte)((r << 4 | r) & 0xFF);
+				pixData[destOffset + 1] = (byte)((g << 4 | g) & 0xFF);
+				pixData[destOffset + 2] = (byte)((b << 4 | b) & 0xFF);
+				pixData[destOffset + 3] = 0xff;
+			}
+			
+			return pixData;
+		}
+
         
         public static byte[] DecodeDXT1(byte[] data, int width, int height)
 		{
@@ -906,6 +965,32 @@ namespace RareView
 				pixData[offset+1] = data[offset+2];
 				pixData[offset+2] = data[offset+1];
 				pixData[offset+3] = data[offset];
+			}
+			
+			return pixData;
+		}
+		
+		public static byte[] DecodeR5G6B5(byte[] data, int width, int height)
+		{
+			var tmpS = new byte[2];
+			var pixData = new byte[(width * height) * 4];
+			for(int i = 0; i < (width * height); i++)
+			{
+				int srcOffset = i * 2;
+				int destOffst = i * 4;
+				
+				tmpS[0] = data[srcOffset + 1];
+				tmpS[1] = data[srcOffset];
+				short color = BitConverter.ToInt16(tmpS, 0);
+				
+				byte b5 = (byte)((color & 0xf800) >> 11);
+				byte g6 = (byte)((color & 0x07e0) >> 5);
+				byte r5 = (byte)((color & 0x1f));
+					
+				pixData[destOffst] = (byte)((r5 << 3) | (r5 >> 2));
+				pixData[destOffst + 1] = (byte)((g6 << 2) | (g6 >> 4));
+				pixData[destOffst + 2] = (byte)((b5 << 3) | (b5 >> 2));
+				pixData[destOffst + 3] = 0xff;
 			}
 			
 			return pixData;
